@@ -34,5 +34,5 @@
 *.swp
 *.swo
 *.DS_Store
-/rules
-/tasks
+rules/
+tasks/
