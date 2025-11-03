@@ -1,0 +1,54 @@
+/**
+ * Root App Component Styles
+ * 
+ * Global layout styles for the application.
+ */
+
+/* 
+  :host selector targets the component's host element (<app-root>)
+  This is Angular's way of styling the component element itself
+*/
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Material Toolbar Styles */
+mat-toolbar {
+  /* 
+    position: sticky keeps the toolbar at the top when scrolling
+    top: 0 ensures it stays at the very top
+    z-index: 1000 ensures it appears above other content
+  */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.app-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-right: 24px;
+}
+
+/* 
+  .spacer class uses flexbox to push content to the right
+  flex: 1 1 auto means it takes up all available space
+*/
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* Active navigation link styling */
+.active-link {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Main content area */
+.main-content {
+  flex: 1; /* Takes remaining space */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  background-color: #f5f5f5; /* Light gray background */
+}
+

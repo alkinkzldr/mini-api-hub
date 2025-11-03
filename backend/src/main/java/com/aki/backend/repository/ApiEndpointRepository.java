@@ -10,7 +10,9 @@ import com.aki.backend.entity.ApiEndpointEntity;
 public interface ApiEndpointRepository extends JpaRepository<ApiEndpointEntity, Long> {
 
     List<ApiEndpointEntity> findByApiInterface_Id(Long apiId);
-    List<ApiEndpointEntity> findByName(String name);
+    // Note: ApiEndpointEntity doesn't have a 'name' field
+    // If you need to find endpoints by path, use: findByPath(String path)
+    // If you need to find by HTTP method, use: findByHttpMethod(String httpMethod)
     Optional<ApiEndpointEntity> findById(Long id);
 
 }

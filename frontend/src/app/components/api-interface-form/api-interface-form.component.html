@@ -1,0 +1,105 @@
+<!-- API Interface Form Template -->
+
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{ isEditMode ? 'Edit API Interface' : 'Create New API Interface' }}
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- 
+        Reactive Forms in Angular:
+        - [formGroup] binds the form element to our FormGroup
+        - formControlName binds each input to a form control
+        - *ngIf shows error messages when field is invalid and touched
+      -->
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!-- Name Field -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" placeholder="Enter API name">
+          <mat-error *ngIf="getControl('name')?.hasError('required') && getControl('name')?.touched">
+            Name is required
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Type Field -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option value="REST">REST</mat-option>
+            <mat-option value="SOAP">SOAP</mat-option>
+            <mat-option value="GraphQL">GraphQL</mat-option>
+            <mat-option value="gRPC">gRPC</mat-option>
+          </mat-select>
+          <mat-error *ngIf="getControl('type')?.hasError('required') && getControl('type')?.touched">
+            Type is required
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Base URL Field -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Base URL</mat-label>
+          <input matInput formControlName="base_url" placeholder="https://api.example.com">
+          <mat-error *ngIf="getControl('base_url')?.hasError('required') && getControl('base_url')?.touched">
+            Base URL is required
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Description Field -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea 
+            matInput 
+            formControlName="description" 
+            rows="4"
+            placeholder="Describe what this API does">
+          </textarea>
+        </mat-form-field>
+
+        <!-- Auth Type Field -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Authentication Type</mat-label>
+          <mat-select formControlName="auth_type">
+            <mat-option value="NONE">None</mat-option>
+            <mat-option value="API_KEY">API Key</mat-option>
+            <mat-option value="Bearer">Bearer Token</mat-option>
+            <mat-option value="Basic">Basic Auth</mat-option>
+            <mat-option value="OAuth">OAuth</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Active Status Checkbox -->
+        <mat-checkbox formControlName="is_active">
+          Active
+        </mat-checkbox>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button 
+            mat-raised-button 
+            type="button" 
+            (click)="cancel()"
+            [disabled]="isSubmitting">
+            Cancel
+          </button>
+          <button 
+            mat-raised-button 
+            color="primary" 
+            type="submit"
+            [disabled]="isSubmitting || form.invalid">
+            <mat-icon *ngIf="!isSubmitting">save</mat-icon>
+            {{ isSubmitting ? 'Saving...' : 'Save' }}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- Loading State -->
+<div *ngIf="isLoading" class="loading">
+  <p>Loading...</p>
+</div>

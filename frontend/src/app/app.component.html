@@ -1,0 +1,37 @@
+<!--
+  Main App Component Template
+  
+  This is the root component template that wraps the entire application.
+  It provides the main layout structure with navigation and a router outlet.
+  
+  Router Outlet:
+  - <router-outlet> is where Angular displays the component for the current route
+  - When you navigate to a route, Angular replaces the content in router-outlet
+  - Think of it as a "placeholder" for route components
+-->
+
+<!-- Material Toolbar - Navigation Header -->
+<mat-toolbar color="primary">
+  <span class="app-title">Mini API Hub</span>
+  <span class="spacer"></span>
+  <!-- 
+    routerLink directive creates a navigation link
+    routerLinkActive adds a CSS class when the route is active
+  -->
+  <a mat-button routerLink="/api-interfaces" routerLinkActive="active-link">
+    API Interfaces
+  </a>
+</mat-toolbar>
+
+<!-- Main Content Area -->
+<div class="main-content">
+  <!-- 
+    Router Outlet
+    This is where Angular displays the component for the current route.
+    When you navigate to:
+    - / → ApiInterfaceListComponent appears here
+    - /api-interfaces/1 → ApiInterfaceDetailComponent appears here
+    - etc.
+  -->
+  <router-outlet></router-outlet>
+</div>

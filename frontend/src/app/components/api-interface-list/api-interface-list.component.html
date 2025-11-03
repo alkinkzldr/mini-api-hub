@@ -1,0 +1,148 @@
+<!--
+  API Interface List Component Template
+  
+  This is the HTML template for displaying the list of API interfaces.
+  
+  Angular Template Syntax:
+  - *ngIf: Conditionally show/hide elements
+  - *ngFor: Loop through arrays
+  - {{ }}: Interpolation - display variable values
+  - [property]: Property binding - set element properties
+  - (event): Event binding - handle user events
+  - [(ngModel)]: Two-way binding - bind input values both ways
+  - routerLink: Navigate to routes
+-->
+
+<div class="container">
+  <!-- Header Section -->
+  <div class="header">
+    <h1>API Interfaces</h1>
+    <!-- 
+      Material Button with routerLink
+      routerLink navigates to a route without reloading the page (SPA navigation)
+      color="primary" gives it the Material primary color (blue)
+    -->
+    <button mat-raised-button color="primary" (click)="createNew()">
+      <!-- Material icon - adds a plus icon -->
+      <mat-icon>add</mat-icon>
+      Create New
+    </button>
+  </div>
+
+  <!-- Search Section -->
+  <!-- 
+    mat-form-field is a Material Design form field wrapper
+    It provides consistent styling and floating labels
+  -->
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search APIs</mat-label>
+    <!-- 
+      matInput makes this a Material input field
+      [(ngModel)] creates two-way binding - when user types, searchTerm updates
+      (input) event fires when user types, calling filterInterfaces()
+    -->
+    <input 
+      matInput 
+      [(ngModel)]="searchTerm" 
+      (input)="filterInterfaces()"
+      placeholder="Search by name, type, or description">
+    <!-- Material search icon -->
+    <mat-icon matPrefix>search</mat-icon>
+  </mat-form-field>
+
+  <!-- Loading Indicator -->
+  <!-- 
+    *ngIf="isLoading" means: only show this div if isLoading is true
+    This shows a loading message while data is being fetched
+  -->
+  <div *ngIf="isLoading" class="loading">
+    <p>Loading API interfaces...</p>
+  </div>
+
+  <!-- API Interfaces Grid -->
+  <!-- 
+    *ngIf="!isLoading" means: show this div only if NOT loading
+    This prevents showing empty grid while loading
+  -->
+  <div *ngIf="!isLoading" class="interfaces-grid">
+    <!-- 
+      *ngFor loops through the filteredInterfaces array
+      Creates one card for each API interface
+      
+      let api = item in the loop
+      i = index (0, 1, 2, ...)
+    -->
+    <mat-card *ngFor="let api of filteredInterfaces; let i = index" class="api-card">
+      <!-- Card Header -->
+      <mat-card-header>
+        <mat-card-title>
+          <!-- 
+            {{ api.name }} displays the value of api.name
+            || 'Unnamed API' means: if name is null/undefined, show "Unnamed API"
+          -->
+          {{ api.name || 'Unnamed API' }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          <!-- Display API type if available -->
+          {{ api.type || 'N/A' }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <!-- Card Content -->
+      <mat-card-content>
+        <!-- Description -->
+        <p class="description">
+          {{ api.description || 'No description available' }}
+        </p>
+
+        <!-- Base URL -->
+        <p class="url">
+          <strong>Base URL:</strong> 
+          <a [href]="api.base_url" target="_blank" rel="noopener noreferrer">
+            {{ api.base_url || 'N/A' }}
+          </a>
+        </p>
+
+        <!-- Auth Type -->
+        <p class="auth">
+          <strong>Auth:</strong> {{ api.auth_type || 'None' }}
+        </p>
+
+        <!-- Active Status Badge -->
+        <span 
+          class="status-badge" 
+          [class.active]="api.is_active" 
+          [class.inactive]="!api.is_active">
+          {{ api.is_active ? 'Active' : 'Inactive' }}
+        </span>
+      </mat-card-content>
+
+      <!-- Card Actions (Buttons) -->
+      <mat-card-actions align="end">
+        <!-- 
+          mat-icon-button creates a button with just an icon
+          (click) event calls the method when button is clicked
+        -->
+        <button mat-icon-button (click)="viewInterface(api.id)" color="primary" title="View Details">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button mat-icon-button (click)="editInterface(api.id)" color="accent" title="Edit">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteInterface(api)" color="warn" title="Delete">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- Empty State -->
+  <!-- 
+    Show this message if not loading AND filtered list is empty
+    This handles both "no APIs exist" and "search returned no results"
+  -->
+  <div *ngIf="!isLoading && filteredInterfaces.length === 0" class="empty-state">
+    <mat-icon class="empty-icon">inbox</mat-icon>
+    <p>{{ searchTerm ? 'No APIs found matching your search.' : 'No API interfaces found. Create one to get started!' }}</p>
+  </div>
+</div>

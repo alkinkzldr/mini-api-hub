@@ -1,0 +1,96 @@
+<!-- API Interface Detail Template -->
+
+<div class="container" *ngIf="!isLoading && apiInterface">
+  <!-- Back Button -->
+  <button mat-icon-button (click)="goBack()" class="back-button">
+    <mat-icon>arrow_back</mat-icon>
+    Back
+  </button>
+
+  <!-- API Interface Details Card -->
+  <mat-card class="detail-card">
+    <mat-card-header>
+      <mat-card-title>{{ apiInterface.name || 'Unnamed API' }}</mat-card-title>
+      <mat-card-subtitle>{{ apiInterface.type || 'N/A' }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Description -->
+      <div class="detail-section">
+        <h3>Description</h3>
+        <p>{{ apiInterface.description || 'No description available' }}</p>
+      </div>
+
+      <!-- Base URL -->
+      <div class="detail-section">
+        <h3>Base URL</h3>
+        <p>
+          <a [href]="apiInterface.base_url" target="_blank" rel="noopener noreferrer">
+            {{ apiInterface.base_url || 'N/A' }}
+          </a>
+        </p>
+      </div>
+
+      <!-- Authentication Type -->
+      <div class="detail-section">
+        <h3>Authentication Type</h3>
+        <p>{{ apiInterface.auth_type || 'None' }}</p>
+      </div>
+
+      <!-- Status -->
+      <div class="detail-section">
+        <h3>Status</h3>
+        <mat-chip [class.active]="apiInterface.is_active" [class.inactive]="!apiInterface.is_active">
+          {{ apiInterface.is_active ? 'Active' : 'Inactive' }}
+        </mat-chip>
+      </div>
+
+      <!-- Timestamps -->
+      <div class="detail-section">
+        <h3>Created</h3>
+        <p>{{ apiInterface.created_at | date:'medium' }}</p>
+      </div>
+
+      <div class="detail-section">
+        <h3>Last Updated</h3>
+        <p>{{ apiInterface.updated_at | date:'medium' }}</p>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-raised-button color="accent" (click)="edit()">
+        <mat-icon>edit</mat-icon>
+        Edit
+      </button>
+      <button mat-raised-button color="warn" (click)="delete()">
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Endpoints Section -->
+  <mat-card class="endpoints-card" *ngIf="apiInterface.id">
+    <mat-card-header>
+      <mat-card-title>Endpoints</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- 
+        Using the endpoint-list component as a child component
+        We pass the apiId as an input property
+      -->
+      <app-endpoint-list [apiId]="apiInterface.id"></app-endpoint-list>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- Loading State -->
+<div *ngIf="isLoading" class="loading">
+  <p>Loading API interface...</p>
+</div>
+
+<!-- Error State -->
+<div *ngIf="error && !isLoading" class="error">
+  <p>{{ error }}</p>
+  <button mat-raised-button (click)="goBack()">Go Back</button>
+</div>

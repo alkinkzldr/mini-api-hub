@@ -1,0 +1,49 @@
+.container {
+  padding: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.back-button {
+  margin-bottom: 16px;
+}
+
+.detail-card {
+  margin-bottom: 24px;
+}
+
+.detail-section {
+  margin-bottom: 24px;
+}
+
+.detail-section h3 {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.detail-section p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.detail-section a {
+  color: #1976d2;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.detail-section a:hover {
+  text-decoration: underline;
+}
+
+.endpoints-card {
+  margin-top: 24px;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 48px;
+}
+

@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+
+/**
+ * Angular Material Theme Import
+ * 
+ * This imports a pre-built Material Design theme. Angular Material provides several
+ * pre-built themes (Indigo/Pink, Purple/Green, Pink/Blue-Grey, etc.).
+ * 
+ * The theme includes:
+ * - Color palettes for primary, accent, and warn colors
+ * - Typography styles
+ * - Component styling
+ * 
+ * You can customize this later by creating a custom theme.
+ */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/**
+ * Global Styles
+ * 
+ * Add any global CSS rules here that apply to your entire application.
+ * For component-specific styles, use the component's .css file.
+ */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

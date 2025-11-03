@@ -35,6 +35,18 @@ services:
     networks:
       - mini-net
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: mini-api-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+    networks:
+      - mini-net
+
 networks:
   mini-net:
 

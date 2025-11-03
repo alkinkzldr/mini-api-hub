@@ -1,0 +1,112 @@
+/**
+ * API Interface List Component Styles
+ * 
+ * Component-scoped styles - these only apply to this component.
+ * Angular uses CSS encapsulation to prevent style conflicts.
+ */
+
+.container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.search-field {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.interfaces-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.api-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.api-card mat-card-content {
+  flex-grow: 1;
+}
+
+.description {
+  margin: 16px 0;
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 1.5;
+}
+
+.url {
+  margin: 8px 0;
+  font-size: 0.9rem;
+}
+
+.url a {
+  color: #1976d2;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.url a:hover {
+  text-decoration: underline;
+}
+
+.auth {
+  margin: 8px 0;
+  font-size: 0.9rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.status-badge.active {
+  background-color: #4caf50;
+  color: white;
+}
+
+.status-badge.inactive {
+  background-color: #9e9e9e;
+  color: white;
+}
+
+.loading {
+  text-align: center;
+  padding: 48px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.empty-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  color: rgba(0, 0, 0, 0.3);
+  margin-bottom: 16px;
+}
+

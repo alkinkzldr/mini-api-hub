@@ -1,0 +1,62 @@
+<!-- Endpoint List Template -->
+
+<div *ngIf="isLoading">
+  <p>Loading endpoints...</p>
+</div>
+
+<div *ngIf="!isLoading">
+  <!-- Material Table -->
+  <!-- 
+    Material Table provides a data table component
+    [dataSource] binds the table to our endpoints array
+    displayedColumns defines which columns to show
+  -->
+  <table mat-table [dataSource]="endpoints" class="endpoints-table" *ngIf="endpoints.length > 0">
+    <!-- HTTP Method Column -->
+    <ng-container matColumnDef="method">
+      <th mat-header-cell *matHeaderCellDef>Method</th>
+      <td mat-cell *matCellDef="let endpoint">
+        <mat-chip [class]="'method-' + (endpoint.httpMethod?.toLowerCase() || '')">
+          {{ endpoint.httpMethod || 'N/A' }}
+        </mat-chip>
+      </td>
+    </ng-container>
+
+    <!-- Path Column -->
+    <ng-container matColumnDef="path">
+      <th mat-header-cell *matHeaderCellDef>Path</th>
+      <td mat-cell *matCellDef="let endpoint">
+        <code>{{ endpoint.path || 'N/A' }}</code>
+      </td>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let endpoint">
+        {{ endpoint.description || 'No description' }}
+      </td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let endpoint">
+        <mat-chip [class.active]="endpoint.isActive" [class.inactive]="!endpoint.isActive">
+          {{ endpoint.isActive ? 'Active' : 'Inactive' }}
+        </mat-chip>
+      </td>
+    </ng-container>
+
+    <!-- Header Row -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    
+    <!-- Data Rows -->
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- Empty State -->
+  <p *ngIf="endpoints.length === 0" class="empty-message">
+    No endpoints found for this API.
+  </p>
+</div>

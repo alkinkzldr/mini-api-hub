@@ -39,7 +39,7 @@ public class ApiInterfaceEntity {
 
 
     // 1:n zu Endpoints
-    @OneToMany(mappedBy = "api_interface", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "apiInterface", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ApiEndpointEntity> endpoints;
 
     @PreUpdate
