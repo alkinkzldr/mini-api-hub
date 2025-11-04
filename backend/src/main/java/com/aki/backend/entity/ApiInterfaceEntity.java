@@ -25,11 +25,9 @@ public class ApiInterfaceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name; // name of the API
     private String type; // REST, SOAP, GraphQL, etc.
     private String base_url; // base URL of the API
-
     @Column(length = 2000)
     private String description;
     private String auth_type;
